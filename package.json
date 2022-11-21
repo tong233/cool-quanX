@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start:1024": "node ./script/1024.js"
+  },
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
