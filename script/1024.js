@@ -85,7 +85,8 @@ const commentArticle = async (article) => {
       body,
     });
 
-    console.log(`回复成功，${res.body.match(/<a.+?>(.+?)<\/a>/g)}`);
+    console.log(`${res.body.match(/<a.+?>(.+?)<\/a>/g)}`);
+    console.log(`回复成功：${randomComment}，标题：${article.title}`);
     return randomComment;
   } catch (error) {
     console.error("回复 error: ", article);
@@ -123,7 +124,7 @@ const doCommentTasks = async () => {
       (a, b) => a.id === b.id
     );
 
-    console.log(`未文章数量：${unCommentArticles.length}`);
+    console.log(`未评论文章数量：${unCommentArticles.length}`);
 
     const item =
       unCommentArticles[randomRange(0, unCommentArticles.length - 1)];
@@ -134,9 +135,7 @@ const doCommentTasks = async () => {
     console.log(`等待${waitTime / 1000}秒`);
 
     const content = await commentArticle(item);
-    const logItem = { ...item, content, date: new Date().toLocaleString() };
-    console.log(JSON.Stringify(logItem));
-    oldArticles.push(logItem);
+    oldArticles.push({ ...item, content, date: new Date().toLocaleString() });
     $.write(oldArticles, ARTICLE_CHE_KEY);
     $.done();
   } catch (error) {
