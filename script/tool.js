@@ -1,6 +1,6 @@
-const $ = API("", true);
+const $ = API("Test", true);
 
-$.write("", "cookie");
+$.write("", "");
 // $.write("", "key");
 // $.read(""); // 将KEY的值取出
 // $.delete(""); // 删除KEY的值

@@ -2,6 +2,6 @@
   "name": "tong233-tasks",
   "description": "自用quanX任务",
   "task": [
-    "1/6 8-23 * * * https://raw.githubusercontent.com/tong233/cool-quanX/master/script/1024.js, img-url=https://raw.githubusercontent.com/crossutility/Quantumult-X/master/quantumult-x.png, tag=1024, enabled=true"
+    "1/8 9-23 * * * https://raw.githubusercontent.com/tong233/cool-quanX/master/script/1024.js, img-url=https://raw.githubusercontent.com/crossutility/Quantumult-X/master/quantumult-x.png, tag=1024, enabled=true"
   ]
 }

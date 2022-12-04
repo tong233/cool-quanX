@@ -9,7 +9,7 @@ if (!COOKIE) {
 const ARTICLE_CHE_KEY = "articles_log";
 
 // 随机等待最大秒
-const DELAY_TIME = 1000 * 20;
+const DELAY_TIME = 1000 * 100;
 
 const headers = {
   connection: "keep-alive",
@@ -86,7 +86,7 @@ const commentArticle = async (article) => {
     });
 
     console.log(`${res.body.match(/<a.+?>(.+?)<\/a>/g)}`);
-    console.log(`回复成功：${randomComment}，标题：${article.title}`);
+    console.log(`回复成功：${randomComment}，--《${article.title}》`);
     return randomComment;
   } catch (error) {
     console.error("回复 error: ", article);
@@ -97,7 +97,7 @@ const commentArticle = async (article) => {
 
 const doCommentTasks = async () => {
   if (!COOKIE) {
-    console.log("没有cookie");
+    $.notify("1024", "没有cookie", "");
     $.done();
     return;
   }
@@ -106,7 +106,7 @@ const doCommentTasks = async () => {
     (item) => new Date(item.date).getTime() > new Date().setHours(0, 0, 0)
   ).length;
 
-  console.log(`今日已评论文章数量：${todayArticles}`);
+  console.log(`今日已评论文章：${todayArticles}`);
   if (todayArticles >= 200) {
     $.notify("1024", "今日评论已达上限", "");
     $.done();
@@ -124,7 +124,7 @@ const doCommentTasks = async () => {
       (a, b) => a.id === b.id
     );
 
-    console.log(`未评论文章数量：${unCommentArticles.length}`);
+    console.log(`可评论文章：${unCommentArticles.length}`);
 
     const item =
       unCommentArticles[randomRange(0, unCommentArticles.length - 1)];
