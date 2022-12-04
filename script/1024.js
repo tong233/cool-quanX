@@ -8,8 +8,8 @@ if (!COOKIE) {
 
 const ARTICLE_CHE_KEY = "articles_log";
 
-// 随机等待最大秒
-const DELAY_TIME = 1000 * 100;
+// 随机等待最大毫秒
+const DELAY_TIME = 1000 * 90;
 
 const headers = {
   connection: "keep-alive",
@@ -28,6 +28,10 @@ const getArticleList = async () => {
       headers: {
         ...headers,
         cookie: "ismob=1; ",
+      },
+      onTimeout: () => {
+        $.notify("1024", "评论超时", "");
+        $.done();
       },
     });
     const reg =
@@ -84,6 +88,10 @@ const commentArticle = async (article) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body,
+      onTimeout: () => {
+        $.notify("1024", "评论超时", "");
+        $.done();
+      },
     });
 
     console.log(`${res.body.match(/<a.+?>(.+?)<\/a>/g)}`);
@@ -131,9 +139,10 @@ const doCommentTasks = async () => {
       unCommentArticles[randomRange(0, unCommentArticles.length - 1)];
 
     const waitTime = randomRange(0, DELAY_TIME);
-    await $.wait(waitTime);
 
     console.log(`等待${waitTime / 1000}秒`);
+
+    await $.wait(waitTime);
 
     const content = await commentArticle(item);
     oldArticles.push({ ...item, content, date: new Date().toLocaleString() });
