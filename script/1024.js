@@ -20,9 +20,10 @@ const headers = {
 
 const getArticleList = async () => {
   try {
-    console.log(`正在获取文章列表`);
+    const randomPage = randomRange(1, 2);
+    console.log(`正在获取第${randomPage}页文章列表`);
     const res = await $.http.get({
-      url: "https://cl.5297x.xyz/thread0806.php?fid=7",
+      url: `https://cl.5297x.xyz/thread0806.php?fid=7&search=&page=${randomPage}`,
       timeout: 15000,
       headers: {
         ...headers,
@@ -129,7 +130,7 @@ const doCommentTasks = async () => {
     const item =
       unCommentArticles[randomRange(0, unCommentArticles.length - 1)];
 
-    const waitTime = randomRange(DELAY_TIME, 0);
+    const waitTime = randomRange(0, DELAY_TIME);
     await $.wait(waitTime);
 
     console.log(`等待${waitTime / 1000}秒`);
@@ -156,8 +157,8 @@ function uniqueBy(arr, fn) {
   }, []);
 }
 
-function randomRange(start, end) {
-  return Math.floor(Math.random() * (end - start) + start);
+function randomRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min); //含最大值，含最小值
 }
 
 doCommentTasks();
