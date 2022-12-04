@@ -29,10 +29,6 @@ const getArticleList = async () => {
         ...headers,
         cookie: "ismob=1; ",
       },
-      onTimeout: () => {
-        $.notify("1024", "获取文章超时", "");
-        $.done();
-      },
     });
     const reg =
       /<a href="htm_(?:mob|data)\/\d+\/\d+\/(\d+?)\.html">(.+?)<\/a>/g;
@@ -47,8 +43,8 @@ const getArticleList = async () => {
     console.log(`获取成功，文章数量：${list.length}`);
     return list;
   } catch (error) {
-    console.log("获取列表 error: ");
     console.log(error);
+    $.notify("1024", "获取获取列表 error", "");
     $.done();
   }
 };
@@ -88,18 +84,14 @@ const commentArticle = async (article) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body,
-      onTimeout: () => {
-        $.notify("1024", "评论超时", "");
-        $.done();
-      },
     });
 
     console.log(`${res.body.match(/<a.+?>(.+?)<\/a>/g)}`);
     console.log(`回复成功：${randomComment}，--《${article.title}》`);
     return randomComment;
   } catch (error) {
-    console.error("回复 error: ", article);
     console.log(error);
+    $.notify("1024", "回复 error", "回复失败");
     $.done();
   }
 };
