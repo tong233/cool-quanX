@@ -30,7 +30,7 @@ const getArticleList = async () => {
         cookie: "ismob=1; ",
       },
       onTimeout: () => {
-        $.notify("1024", "评论超时", "");
+        $.notify("1024", "获取文章超时", "");
         $.done();
       },
     });
