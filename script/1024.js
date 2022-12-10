@@ -120,12 +120,21 @@ const doCommentTasks = async () => {
 
     const unCommentArticles = uniqueBy(
       articles.filter((item) => {
+        if (item.title.includes("禁止无关回复")) {
+          return false;
+        }
         return !oldArticles.some((ele) => ele.id === item.id);
       }),
       (a, b) => a.id === b.id
     );
 
     console.log(`可评论文章：${unCommentArticles.length}`);
+
+    if (!unCommentArticles.length) {
+      $.notify("1024", "没有可评论文章", "");
+      $.done();
+      return;
+    }
 
     const item =
       unCommentArticles[randomRange(0, unCommentArticles.length - 1)];
