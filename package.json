@@ -3,6 +3,9 @@
     "start:1024": "node ./script/1024.js"
   },
   "dependencies": {
+    "cron": "^2.4.0",
+    "node-notifier": "^10.0.1",
+    "puppeteer": "^20.9.0",
     "request": "^2.88.2"
   }
 }
