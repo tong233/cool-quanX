@@ -8,13 +8,13 @@ const notifier = require("node-notifier");
 const CHECK_URL =
   "https://bawtt.ydmap.cn/booking/schedule/102824?salesItemId=100908";
 
-// 从第几个时间段开始检查 start from 0
-const CHECK_START_INDEX = 2;
+// 从第几个时间段开始检查 start from 1
+const CHECK_START_INDEX = 3;
 
 async function checkTickets() {
+  console.log("开始查询页面");
   const browser = await puppeteer.launch({ headless: "new" });
   const page = await browser.newPage();
-  console.log("开始查询页面");
   await page.goto(CHECK_URL);
 
   try {
@@ -26,7 +26,7 @@ async function checkTickets() {
 
     for (let index = 0; index < timeCells.length; index++) {
       const cell = timeCells[index];
-
+      
       if (index >= CHECK_START_INDEX) {
         const ticketText = await cell.evaluate((el) => el.textContent);
         if (ticketText.includes("可约")) {
@@ -55,7 +55,7 @@ async function checkTickets() {
 }
 
 // 0-19点每5分钟检查一次
-const job = new CronJob("*/5 0-19 * * *", checkTickets, null, true);
+const job = new CronJob("*/1 0-19 * * *", checkTickets, null, true);
 job.start();
 
 checkTickets();
