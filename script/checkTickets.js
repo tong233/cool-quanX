@@ -54,8 +54,8 @@ async function checkTickets() {
   }
 }
 
-// 0-19点每5分钟检查一次
-const job = new CronJob("*/1 0-19 * * *", checkTickets, null, true);
+// 8-19点每1分钟检查一次
+const job = new CronJob("*/1 8-19 * * *", checkTickets, null, true);
 job.start();
 
 checkTickets();
