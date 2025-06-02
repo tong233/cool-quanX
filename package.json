@@ -1,11 +1,13 @@
 {
   "scripts": {
-    "start:1024": "node ./script/1024.js"
+    "start:1024": "node ./script/1024.js",
+    "wtt": "node ./script/checkTickets.js"
   },
   "dependencies": {
     "cron": "^2.4.0",
     "node-notifier": "^10.0.1",
-    "puppeteer": "^20.9.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "request": "^2.88.2"
   }
 }
