@@ -6,8 +6,7 @@
   "dependencies": {
     "cron": "^2.4.0",
     "node-notifier": "^10.0.1",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "playwright": "^1.60.0",
     "request": "^2.88.2"
   }
 }
