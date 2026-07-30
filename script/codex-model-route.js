@@ -6,14 +6,14 @@
  *   2. 请求模型为 SOURCE_MODEL
  * 命中后将请求体里的模型改写为 TARGET_MODEL
  *
- * CC Switch 路由服务地址：127.0.0.1:15721
+ * CC Switch 路由服务地址：ai.hairoutech.com（QX 监听不了 127.0.0.1，改用远程地址）
  * rewrite 配置见 rewrite/ccswitch.conf
  */
 
 // ===== 配置 =====
 const KEY_MATCH = "yBDUUsmLEL"; // api key 需要包含的字符串
 const SOURCE_MODEL = "codex-auto-review"; // 需要匹配的模型（全等，想模糊匹配可改成 .includes）
-const TARGET_MODEL = "deepseek-v4-flash"; // 命中后改写的模型
+const TARGET_MODEL = "gpt-5.4-mini"; // 命中后改写的模型
 // =================
 
 const TAG = "[codex-model-route]";
@@ -34,7 +34,6 @@ let body = $request.body || "";
 
 // 传给 $done 的修改内容，空对象表示原样放行
 let result = {};
-
 if (apiKey.includes(KEY_MATCH)) {
   try {
     const json = JSON.parse(body);
