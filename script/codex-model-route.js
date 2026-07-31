@@ -13,7 +13,7 @@
 // ===== 配置 =====
 const KEY_MATCH = "yBDUUsmLEL"; // api key 需要包含的字符串
 const SOURCE_MODEL = "codex-auto-review"; // 需要匹配的模型（全等，想模糊匹配可改成 .includes）
-const TARGET_MODEL = "gpt-5.4-mini"; // 命中后改写的模型
+const TARGET_MODEL = "gpt-5.6-luna"; // 命中后改写的模型
 // =================
 
 const TAG = "[codex-model-route]";
